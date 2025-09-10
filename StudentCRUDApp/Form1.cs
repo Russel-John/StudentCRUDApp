@@ -45,7 +45,30 @@ namespace StudentCRUDApp
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("INSERT INTO Students (Firstname, Lastname, Age, Course) VALUES (@Firstname, @Lastname, @Age, @Course)", conn);
+                cmd.Parameters.AddWithValue("@Firstname", txtFirstName.Text);
+                cmd.Parameters.AddWithValue("@Lastname", txtLastName.Text);
+                cmd.Parameters.AddWithValue("@Age", numAge.Text);
+                cmd.Parameters.AddWithValue("@Course", lblCourse.Text);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("User added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadData();
+            }
+        }
 
+        private void LoadData()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Students", conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                dataGridView1.DataSource = dt;
+            }
         }
 
         private void txtCourse_SelectedIndexChanged(object sender, EventArgs e)
