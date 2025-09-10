@@ -51,8 +51,8 @@ namespace StudentCRUDApp
                 SqlCommand cmd = new SqlCommand("INSERT INTO Students (Firstname, Lastname, Age, Course) VALUES (@Firstname, @Lastname, @Age, @Course)", conn);
                 cmd.Parameters.AddWithValue("@Firstname", txtFirstName.Text);
                 cmd.Parameters.AddWithValue("@Lastname", txtLastName.Text);
-                cmd.Parameters.AddWithValue("@Age", numAge.Text);
-                cmd.Parameters.AddWithValue("@Course", lblCourse.Text);
+                cmd.Parameters.AddWithValue("@Age", numAge.Value);
+                cmd.Parameters.AddWithValue("@Course", txtCourse.Text);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("User added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadData();
