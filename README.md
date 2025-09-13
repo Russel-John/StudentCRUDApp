@@ -1,6 +1,21 @@
 # StudentCRUDApp
-## Run This Command to Sql Before Debugging
 
+A simple Windows Forms application with **CRUD (Create, Read, Update, Delete)** functionality using C# and SQL Server.
+
+---
+
+## 📦 Requirements
+- Visual Studio (with Windows Forms .NET Framework support)
+- SQL Server / SQL Server Express
+- SQL Server Management Studio (SSMS) (optional, for database management)
+
+---
+
+## 🗄️ Database Setup
+
+Before running the application, execute the following SQL commands:
+
+```sql
 CREATE DATABASE StudentDB;
 GO
 
