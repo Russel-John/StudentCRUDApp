@@ -23,13 +23,55 @@ namespace StudentCRUDApp
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int studentID = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["StudentID"].Value);
 
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("DELETE FROM Students WHERE StudentID = @StudentID", conn);
+                    cmd.Parameters.AddWithValue("@StudentID", studentID);
+                    cmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Student deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadData();
+            }
+            else
+            {
+                MessageBox.Show("Please select a student to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
+
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int studentID = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["StudentID"].Value);
 
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("UPDATE Students SET Firstname=@Firstname, Lastname=@Lastname, Age=@Age, Course=@Course WHERE StudentID=@StudentID", conn);
+                    cmd.Parameters.AddWithValue("@Firstname", txtFirstName.Text);
+                    cmd.Parameters.AddWithValue("@Lastname", txtLastName.Text);
+                    cmd.Parameters.AddWithValue("@Age", numAge.Value);
+                    cmd.Parameters.AddWithValue("@Course", txtCourse.Text);
+                    cmd.Parameters.AddWithValue("@StudentID", studentID);
+                    cmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Student updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadData();
+            }
+            else
+            {
+                MessageBox.Show("Please select a student to edit.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
+
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
