@@ -7,7 +7,7 @@ A simple Windows Forms application with **CRUD (Create, Read, Update, Delete)** 
 ## 📦 Requirements
 - Visual Studio (with Windows Forms .NET Framework support)
 - SQL Server / SQL Server Express
-- SQL Server Management Studio (SSMS) (optional, for database management)
+- SQL Server Management Studio (SSMS) 
 
 ---
 
